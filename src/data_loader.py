@@ -1,9 +1,9 @@
 import torch
 import torch.utils.data as data
 import os
-import nltk
 from PIL import Image
 import pandas as pd
+import tokenizer
 
 
 class BokeDataset(data.Dataset):
@@ -20,21 +20,21 @@ class BokeDataset(data.Dataset):
         self.root = root
         self.vocab = vocab
         self.transform = transform
-        self.boke = pd.read_csv("../relation.csv")
+        self.boke = pd.read_csv("data/relation.csv")
 
     def __getitem__(self, index):
         """Returns one data pair (image and caption)."""
         vocab = self.vocab
         boke = self.boke
-        caption = boke.iloc["text"]
-        path = boke.iloc["image"]
+        caption = boke["text"][index]
+        path = boke["image"][index]
 
         image = Image.open(os.path.join(self.root, path)).convert("RGB")
         if self.transform is not None:
             image = self.transform(image)
 
         # Convert caption (string) to word ids.
-        tokens = nltk.tokenize.word_tokenize(str(caption).lower())
+        tokens = tokenizer.tokenize(str(caption))
         caption = []
         caption.append(vocab("<start>"))
         caption.extend([vocab(token) for token in tokens])

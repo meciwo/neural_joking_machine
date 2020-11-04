@@ -1,4 +1,4 @@
-from scripts.tokenizer import tokenize
+from src.tokenizer import tokenize
 
 
 def test_tokinzer():

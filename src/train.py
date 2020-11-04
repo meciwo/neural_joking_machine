@@ -9,6 +9,7 @@ import pickle
 from data_loader import get_loader
 from model import EncoderCNN, DecoderRNN
 from torch.nn.utils.rnn import pack_padded_sequence
+from build_vocab import Vocabulary
 
 
 # Device configuration
@@ -67,8 +68,7 @@ def main(args):
             # Set mini-batch dataset
             images = images.to(device)
             captions = captions.to(device)
-            targets = pack_padded_sequence(
-                captions, lengths, batch_first=True)[0]
+            targets = pack_padded_sequence(captions, lengths, batch_first=True)[0]
 
             # Forward, backward and optimize
             features = encoder(images)
@@ -98,15 +98,13 @@ def main(args):
                 torch.save(
                     decoder.state_dict(),
                     os.path.join(
-                        args.model_path, "decoder-{}-{}.ckpt".format(
-                            epoch + 1, i + 1)
+                        args.model_path, "decoder-{}-{}.ckpt".format(epoch + 1, i + 1)
                     ),
                 )
                 torch.save(
                     encoder.state_dict(),
                     os.path.join(
-                        args.model_path, "encoder-{}-{}.ckpt".format(
-                            epoch + 1, i + 1)
+                        args.model_path, "encoder-{}-{}.ckpt".format(epoch + 1, i + 1)
                     ),
                 )
 
@@ -131,7 +129,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--image_dir",
         type=str,
-        default="data/resized_image",
+        default="data/resized_images",
         help="directory for resized images",
     )
     # parser.add_argument('--caption_path', type=str,\
