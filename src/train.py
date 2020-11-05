@@ -9,7 +9,7 @@ import pickle
 from data_loader import get_loader
 from model import EncoderCNN, DecoderRNN
 from torch.nn.utils.rnn import pack_padded_sequence
-from build_vocab import Vocabulary
+from build_vocab import Vocabulary  # noqa : F401
 
 
 # Device configuration
