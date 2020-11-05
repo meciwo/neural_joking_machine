@@ -3,3 +3,4 @@ notebook/
 .vscode
 research.code-workspace
 .venv/
+.DS_Store
