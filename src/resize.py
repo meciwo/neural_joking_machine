@@ -40,13 +40,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--image_dir",
         type=str,
-        default="./data/images/",
+        default="../../../../Volumes/my_strage/data/images/",
         help="directory for train images",
     )
     parser.add_argument(
         "--output_dir",
         type=str,
-        default="./data/resized_images/",
+        default="../../../../Volumes/my_strage/data/resized_images/",
         help="directory for saving resized images",
     )
     parser.add_argument(
