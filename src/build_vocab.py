@@ -30,7 +30,7 @@ class Vocabulary(object):
 
 def build_vocab(file, threshold):
     """Build a simple vocabulary wrapper."""
-    captions = pd.read_csv(file).text.values
+    captions = pd.read_csv(file, encoding="utf-8").text.values
     counter = Counter()
     for i, caption in enumerate(captions):
         tokens = tokenize(caption)
@@ -79,7 +79,7 @@ if __name__ == "__main__":
         help="path for saving vocabulary wrapper",
     )
     parser.add_argument(
-        "--threshold", type=int, default=4, help="minimum word count threshold"
+        "--threshold", type=int, default=1, help="minimum word count threshold"
     )
     args = parser.parse_args()
     main(args)

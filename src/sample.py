@@ -6,6 +6,7 @@ import pickle
 from torchvision import transforms
 from model import EncoderCNN, DecoderRNN
 from PIL import Image
+from build_vocab import Vocabulary  # noqa : F401
 
 
 # Device configuration
@@ -44,8 +45,12 @@ def main(args):
     decoder = decoder.to(device)
 
     # Load the trained model parameters
-    encoder.load_state_dict(torch.load(args.encoder_path))
-    decoder.load_state_dict(torch.load(args.decoder_path))
+    encoder.load_state_dict(
+        torch.load(args.encoder_path, map_location=torch.device(device))
+    )
+    decoder.load_state_dict(
+        torch.load(args.decoder_path, map_location=torch.device(device))
+    )
 
     # Prepare an image
     image = load_image(args.image, transform)
@@ -81,13 +86,13 @@ if __name__ == "__main__":
     parser.add_argument(
         "--encoder_path",
         type=str,
-        default="models/encoder-5-3000.pkl",
+        default="models/encoder-4-3000.ckpt",
         help="path for trained encoder",
     )
     parser.add_argument(
         "--decoder_path",
         type=str,
-        default="models/decoder-5-3000.pkl",
+        default="models/decoder-4-3000.ckpt",
         help="path for trained decoder",
     )
     parser.add_argument(

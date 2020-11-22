@@ -5,5 +5,5 @@ mecab.parse("")  # バグ対処
 
 
 def tokenize(text):
-    result = mecab.parse(text).strip().split(" ")
+    result = mecab.parse(str(text).strip()).split(" ")
     return result

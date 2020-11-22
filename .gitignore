@@ -4,3 +4,5 @@ notebook/
 research.code-workspace
 .venv/
 .DS_Store
+models/
+src/__pycache__
