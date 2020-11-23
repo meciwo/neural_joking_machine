@@ -21,7 +21,7 @@ class BokeDataset(data.Dataset):
         self.vocab = vocab
         self.transform = transform
         self.boke = pd.read_csv("data/relation.csv")
-        self.boke = self.boke[self.boke["image"] != "image"]
+        self.boke = self.boke[self.boke["image"] != "image"].reset_index()
 
     def __getitem__(self, index):
         """Returns one data pair (image and caption)."""
