@@ -4,7 +4,6 @@ from collections import Counter
 import pandas as pd
 from tokenizer import tokenize
 from tqdm import tqdm
-import os
 
 
 class Vocabulary(object):

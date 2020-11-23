@@ -8,6 +8,8 @@ authors = ["meciwo <shanshan0474@gmail.com>"]
 python = "^3.7"
 torch = "^1.7.0"
 pillow = "^8.0.1"
+mecab-python3 = "^1.0.3"
+torchvision = "^0.8.1"
 
 [tool.poetry.dev-dependencies]
 
