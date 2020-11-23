@@ -14,6 +14,7 @@ from build_vocab import Vocabulary  # noqa : F401
 
 # Device configuration
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+print(f"use {device}")
 
 
 def main(args):

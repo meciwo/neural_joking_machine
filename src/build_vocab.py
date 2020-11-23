@@ -3,6 +3,8 @@ import argparse
 from collections import Counter
 import pandas as pd
 from tokenizer import tokenize
+from tqdm import tqdm
+import os
 
 
 class Vocabulary(object):
@@ -28,16 +30,24 @@ class Vocabulary(object):
         return len(self.word2idx)
 
 
-def build_vocab(file, threshold):
+def build_vocab(file, threshold, wiki_file=None):
     """Build a simple vocabulary wrapper."""
     captions = pd.read_csv(file, encoding="utf-8").text.values
     counter = Counter()
-    for i, caption in enumerate(captions):
+
+    for i, caption in enumerate(tqdm(captions)):
         tokens = tokenize(caption)
         counter.update(tokens)
 
-        if (i + 1) % 1000 == 0:
-            print("[{}/{}] Tokenized the captions.".format(i + 1, len(captions)))
+        # if (i + 1) % 1000 == 0:
+        #    print("[{}/{}] Tokenized the captions.".format(i + 1, len(captions)))
+
+    if wiki_file is not None:
+        with open(wiki_file) as f:
+            # ファイルのサイズを使用しプログレスバーを作成
+            for line in tqdm(f):
+                tokens = tokenize(line)
+                counter.update(tokens)
 
     # If the word frequency is less than 'threshold', then the word is discarded.
     words = [word for word, cnt in counter.items() if cnt >= threshold]
@@ -52,11 +62,14 @@ def build_vocab(file, threshold):
     # Add the words to the vocabulary.
     for i, word in enumerate(words):
         vocab.add_word(word)
+
     return vocab
 
 
 def main(args):
-    vocab = build_vocab(file=args.caption_path, threshold=args.threshold)
+    vocab = build_vocab(
+        file=args.caption_path, threshold=args.threshold, wiki_file=args.wiki_path,
+    )
     vocab_path = args.vocab_path
     with open(vocab_path, "wb") as f:
         pickle.dump(vocab, f)
@@ -73,13 +86,19 @@ if __name__ == "__main__":
         help="path for train annotation file",
     )
     parser.add_argument(
+        "--wiki_path",
+        type=str,
+        default="data/wiki.txt",
+        help="path for train annotation file",
+    )
+    parser.add_argument(
         "--vocab_path",
         type=str,
         default="./data/vocab.pkl",
         help="path for saving vocabulary wrapper",
     )
     parser.add_argument(
-        "--threshold", type=int, default=1, help="minimum word count threshold"
+        "--threshold", type=int, default=5, help="minimum word count threshold"
     )
     args = parser.parse_args()
     main(args)

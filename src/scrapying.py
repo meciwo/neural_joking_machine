@@ -10,7 +10,7 @@ SAVE_PATH = "../../../../Volumes/my_strage/data/images/"
 OUTPUT_PATH = "data/relation/"
 d = defaultdict(list)
 missed_img_num = 0
-download_num = 100
+download_num = 100000
 # texts = []
 # Webページを取得して解析する
 # 4.4MB/100毎
@@ -45,7 +45,7 @@ for page in tqdm(range(download_num)):
         except AttributeError:
             missed_img_num += 1
     except ConnectionError:
-        pass
+        print("http connection error happened")
 
     if (page + 1) % (download_num // 10) == 0:
         main_df = pd.DataFrame(
