@@ -6,3 +6,5 @@ research.code-workspace
 .DS_Store
 models/
 src/__pycache__
+.env
+tests/__pycache__

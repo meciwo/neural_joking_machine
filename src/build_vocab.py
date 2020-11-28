@@ -67,7 +67,7 @@ def build_vocab(file, threshold, wiki_file=None):
 
 def main(args):
     vocab = build_vocab(
-        file=args.caption_path, threshold=args.threshold, wiki_file=args.wiki_path,
+        file=args.caption_path, threshold=args.threshold, wiki_file=None,
     )
     vocab_path = args.vocab_path
     with open(vocab_path, "wb") as f:
@@ -97,7 +97,7 @@ if __name__ == "__main__":
         help="path for saving vocabulary wrapper",
     )
     parser.add_argument(
-        "--threshold", type=int, default=5, help="minimum word count threshold"
+        "--threshold", type=int, default=1, help="minimum word count threshold"
     )
     args = parser.parse_args()
     main(args)

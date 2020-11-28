@@ -142,7 +142,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--save_step",
         type=int,
-        default=1000,
+        default=5000,
         help="step size for saving trained models",
     )
 
