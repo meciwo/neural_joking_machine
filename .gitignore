@@ -1,10 +1,10 @@
-data/
+data/*
 notebook/
 .vscode
 research.code-workspace
 .venv/
 .DS_Store
-models/
+models/*
 src/__pycache__
 .env
 tests/__pycache__
