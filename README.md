@@ -1,11 +1,11 @@
 # neural_joking_machine
-This is a NN model for generating a Japanese funny caption for a image referenced on [Neural Joking Machine : Humorous image captioning][1]
-A lot of codes are from [this repository][2]
+This is a NN model for generating a Japanese funny caption for a image referenced on [Neural Joking Machine : Humorous image captioning][1].
+<br>A lot of codes are from [this repository][2].
 
 [1]:https://arxiv.org/abs/1805.11850
 [2]:hoge
 
-# Installation
+## Installation
 ```sh
 git clone https://github.com/meciwo/neural_joking_machine.git
 cd neural_joking_machine
@@ -22,22 +22,22 @@ pip install poetry
 poetry install
 ```
 
-# Usage
-## Scrayping
+## Usage
+### Scrayping
 ```sh
 python scr/scrayping.py
 ```
 
-## preprocessing
+### preprocessing
 ```sh
 python src/build_vocab.py
 ```
-## training
+### training
 ```sh
 python src/train.py
 ```
 
-## sampling
+### sampling
 ```sh
 python src/sampling --image PATH_TO_YOUR_IMAGE
 ```
